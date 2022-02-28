@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  loki:
+    image: grafana/loki:2.0.0
+    container_name: grafana-loki
+    command: -config.file=/mnt/config/loki-config.yml
+    restart: unless-stopped
+    volumes:
+      - ./loki-config.yaml:/mnt/config/loki-config.yml
+      - /srv/dev-disk-by-uuid-9111da9d-0af8-41d4-ada0-5951e47aad5c/Buffer/loki:/loki
+    ports:
+      - 3100:3100
+
+  grafana:
+    image: grafana/grafana:7.2.2
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+    expose:
+      - 3000

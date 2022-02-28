@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
   loki:
@@ -6,8 +6,9 @@ services:
     container_name: loki
     command: -config.file=/mnt/config/loki-config.yml
     restart: unless-stopped
+    user: "1000"
     volumes:
-      - ./loki-config.yaml:/mnt/config/loki-config.yml
+      - ./loki-config.yml:/mnt/config/loki-config.yml
       - /srv/dev-disk-by-uuid-9111da9d-0af8-41d4-ada0-5951e47aad5c/Buffer/loki:/loki
     ports:
       - 3100:3100
@@ -16,6 +17,7 @@ services:
     image: grafana/grafana:7.2.2
     container_name: grafana
     restart: unless-stopped
+    user: "1000"
     volumes:
       - /srv/dev-disk-by-uuid-9111da9d-0af8-41d4-ada0-5951e47aad5c/Buffer/grafana:/var/lib/grafana
     ports:

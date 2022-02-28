@@ -17,6 +17,6 @@ services:
     container_name: grafana
     restart: unless-stopped
     volumes:
-      - grafana-data:/var/lib/grafana
+      - /srv/dev-disk-by-uuid-9111da9d-0af8-41d4-ada0-5951e47aad5c/Buffer/grafana:/var/lib/grafana
     expose:
       - 3000
